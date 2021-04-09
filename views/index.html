@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <!-- we import arjs version without NFT but with marker + location based support -->
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  <body style="margin : 0px; overflow: hidden;">
+    <a-scene embedded arjs>
+      <!-- <a-marker type="pattern" url="https://192.168.11.208:5678/markers/default.patt"> -->
+      <a-marker preset="hiro" >
+        <a-entity
+          position="0 0 0"
+          scale="0.05 0.05 0.05"
+          gltf-model="https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
+        ></a-entity>
+      </a-marker>
+      <a-entity camera></a-entity>
+    </a-scene>
+    <div style="z-index: 1000">        
+      <p style="color: white; font-size: large;">
+        Whats Up Madafaka 
+      </p>
+    </div>
+  </body>
+</html>
