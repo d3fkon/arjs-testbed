@@ -1,24 +1,32 @@
 <!DOCTYPE html>
 <html>
-  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-  <!-- we import arjs version without NFT but with marker + location based support -->
-  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-  <body style="margin : 0px; overflow: hidden;">
-    <a-scene embedded arjs>
-      <!-- <a-marker type="pattern" url="https://192.168.11.208:5678/markers/default.patt"> -->
-      <a-marker preset="hiro" >
-        <a-entity
-          position="0 0 0"
-          scale="0.05 0.05 0.05"
-          gltf-model="https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
-        ></a-entity>
-      </a-marker>
-      <a-entity camera></a-entity>
-    </a-scene>
-    <div style="z-index: 1000">        
-      <p style="color: white; font-size: large;">
-        Whats Up Madafaka 
-      </p>
-    </div>
-  </body>
+    <script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
+    <!-- we import arjs version without NFT but with marker + location based support -->
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aframe-template-component@3.2.1/index.min.js"></script>
+     <body style='margin : 0px; overflow: hidden;'>
+        <!-- we add detectionMode and matrixCodeType to tell AR.js to recognize barcode markers -->
+        <a-scene embedded vr-mode-ui="enabled: false" arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
+
+        <a-assets>
+            <a-asset-item id="animated-asset-2" src="https://192.168.11.208:5678/obj/wtf.gltf"></a-asset-item>
+            <a-asset-item id="animated-asset-3" src="https://192.168.11.208:5678/obj/asset.gltf"></a-asset-item>
+            <a-asset-item id="animated-asset-4" src="https://192.168.11.208:5678/obj/asset2.gltf"></a-asset-item>
+            <a-asset-item id="thai" src="https://192.168.11.208:5678/obj/thai.gltf"></a-asset-item>
+        </a-assets>
+
+        <a-marker type='barcode' value='31'>
+            <a-box position='0 0.5 0' color="yellow"></a-box>
+        </a-marker>
+
+        <a-marker id="animated-marker" type='barcode' value='30'>
+            <a-entity
+                gltf-model="#thai"
+                scale="0.3 0.3 0.3">
+            </a-entity>
+        </a-marker>
+
+        <a-entity camera></a-entity>
+        </a-scene>
+    </body>
 </html>
