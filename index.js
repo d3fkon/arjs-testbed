@@ -7,6 +7,7 @@ var certificate = fs.readFileSync('localhost.pem');
 
 const app = express()
 express.static.mime.define({ 'text/plain': ['gltf'] });
+app.use(express.static(__dirname + "/public"))
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile)
 app.use('/obj', express.static('3d-models'))
