@@ -1,10 +1,4 @@
 window.onload = () => {
-    const carousel = document.querySelector('#opCarousel')
-    $('#opCarousel').bind('slid.bs.carousel', function (e) {
-        const currentIndex = ($('div.active').index());
-        AFRAME.scenes[0].emit('nextModel', { currentIndex })
-    });
-
     const elem = document.querySelector('.main-carousel');
     const flkty = new Flickity(elem, {
         // options

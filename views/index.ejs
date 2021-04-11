@@ -6,6 +6,14 @@
     <!-- we import arjs version without NFT but with marker + location based support -->
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
     <script src="https://unpkg.com/aframe-state-component@6.7.0/dist/aframe-state-component.min.js"></script>
+    <script>
+        /// Global declartion of Menu Items
+        const menuItemsJSON = '<%- JSON.stringify(menuItems) %>'
+        const menuItems = JSON.parse(menuItemsJSON);
+        console.log({
+            menuItems
+        })
+    </script>
     <script src="/javascript/aframe-state.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
@@ -16,43 +24,21 @@
 
 <body style='margin : 0px; overflow: hidden;'>
     <!-- we add detectionMode and matrixCodeType to tell AR.js to recognize barcode markers -->
-    <div class="buttons">
-        <!-- <button class="say-hi-button" onclick="sayHi()">SAY HI!</button> -->
-        <!-- <div id="opCarousel" class="carousel slide say-hi-button" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            </ol>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <p>
-                        Thai Chicken Curry with Vermont Sauce
-                    </p>
-                </div>
-                <div class="carousel-item">
-                    <p>
-                        Real Thai Hotdog
-                    </p>
-                </div>
-                <div class="carousel-item">
-                    <p>
-                        Thai Burger with Maggots
-                    </p>
-                </div>
-            </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div> -->
+    <div class="html-ui">
         <div class="main-carousel">
-            <div class="carousel-cell" data-flickity-bg-lazyload="https://www.thespruceeats.com/thmb/9QUNxZ9-RO4uLx48uTfLnUK7IWI=/2000x1332/filters:fill(auto,1)/thai-red-curry-with-chicken-recipe-3217262-hero-01-1099358354ca43b89d2c7cc3409a079b.jpg"></div>
-            <div class="carousel-cell" data-flickity-bg-lazyload="https://unsplash.it/640/481/?random"></div>
-            <div class="carousel-cell" data-flickity-bg-lazyload="https://unsplash.it/640/482/?random"></div>
+            <% menuItems.forEach(function(item) { %>
+                <div class="carousel-cell" data-flickity-bg-lazyload="<%= item.imageUrl %>">
+                    <div class="bg-overlay">
+                        <div class="text-wrapper">
+                            <p><b><%= item.name %></b>
+                                <br/>
+                                <%= item.priceString %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <% }) %>
         </div>
     </div>
 
