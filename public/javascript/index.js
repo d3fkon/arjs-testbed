@@ -1,11 +1,12 @@
-$('#opCarousel').on('slide.bs.carousel', function() {
-    // do something…
-})
+window.onload = () => {
+    const carousel = document.querySelector('#opCarousel')
+    $('#opCarousel').bind('slid.bs.carousel', function(e) {
+        const currentIndex = ($('div.active').index());
+        AFRAME.scenes[0].emit('nextModel', { currentIndex })
+    });
 
-const carousel = document.querySelector('#opCarousel')
-carousel.addEventListener('slide.bs.carousel', e => {
-    console.log(e)
-})
+}
+
 
 const sayHi = () => {
     // const thaiasset = document.queryselector('#thai');
