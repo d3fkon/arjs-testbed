@@ -42,15 +42,21 @@
     </div>
 
 
+    <a-scene embedded vr-mode-ui="enabled: false" arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3; trackingMethod: best;">
+        <a-assets>
+                <% menuItems.forEach(function(item) { %>
+                    <a-asset-item id="<%= item.id %>" src="<%= item.object.url %>" >
 
-    <a-scene embedded vr-mode-ui="enabled: false" arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
+                    </a-asset-item>
+                    <% }) %>
+        </a-assets>
 
         <a-marker type='barcode' value='31'>
             <a-box position='0 0.5 0' color="yellow"></a-box>
         </a-marker>
 
         <a-marker id="animated-marker" type='barcode' value='30'>
-            <a-entity id="aEntity" bind__gltf-model="model.url" bind__scale="model.scale">
+            <a-entity id="aEntity" bind__gltf-model="model.id" bind__scale="model.scale">
             </a-entity>
         </a-marker>
 

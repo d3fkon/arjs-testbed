@@ -12,10 +12,13 @@
 			<a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> ar - hit test<br/>(Chrome Android 81+)
 		</div>
 
+
 		<script type="module">
 
-import * as THREE from 'https://unpkg.com/three/build/three.module.js';
+      import * as THREE from 'https://unpkg.com/three/build/three.module.js';
 			import { ARButton } from 'https://unpkg.com/three/examples/jsm/webxr/ARButton.js';
+			import {GLTFLoader} from 'https://unpkg.com/three/examples/jsm/loaders/GLTFLoader.js'
+			import {DRACOLoader} from 'https://unpkg.com/three/examples/jsm/loaders/DRACOLoader.js'
 
 			let container;
 			let camera, scene, renderer;
@@ -58,24 +61,54 @@ import * as THREE from 'https://unpkg.com/three/build/three.module.js';
 
 				const geometry = new THREE.CylinderGeometry( 0.1, 0.1, 0.2, 32 ).translate( 0, 0.1, 0 );
 
+        const gltfLoader = new GLTFLoader();
+        const dracoLoader = new DRACOLoader();
+        dracoLoader.setDecoderPath('https://unpkg.com/three/examples/js/libs/draco/draco_decoder.js');
+        gltfLoader.setDRACOLoader(dracoLoader)
+
+
 				function onSelect() {
-
 					if ( reticle.visible ) {
+						// const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
+						// const mesh = new THREE.Mesh( geometry, material );
+						// mesh.position.setFromMatrixPosition( reticle.matrix );
+						// mesh.scale.y = Math.random() * 2 + 1;
+						// scene.add( mesh );
+            // Load a glTF resource
+						gltfLoader.load(
+							// resource URL
+							'/obj/chutcakex.glb',
+							// called when the resource is loaded
+							function ( gltf ) {
 
-						const material = new THREE.MeshPhongMaterial( { color: 0xffffff * Math.random() } );
-						const mesh = new THREE.Mesh( geometry, material );
-						mesh.position.setFromMatrixPosition( reticle.matrix );
-						mesh.scale.y = Math.random() * 2 + 1;
-						scene.add( mesh );
+								gltf.scene.scale.set(0.1, 0.1, 0.1)
+								scene.add( gltf.scene );
 
+								// gltf.animations; // Array<THREE.AnimationClip>
+								// gltf.scene; // THREE.Group
+								// gltf.scenes; // Array<THREE.Group>
+								// gltf.cameras; // Array<THREE.Camera>
+								// gltf.asset; // Object
+
+							},
+							// called while loading is progressing
+							function ( xhr ) {
+
+								console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+							},
+							// called when loading has errors
+							function ( error ) {
+
+								console.log( 'An error happened' );
+
+							}
+						);
 					}
-
 				}
-
 				controller = renderer.xr.getController( 0 );
 				controller.addEventListener( 'select', onSelect );
 				scene.add( controller );
-
 				reticle = new THREE.Mesh(
 					new THREE.RingGeometry( 0.15, 0.2, 32 ).rotateX( - Math.PI / 2 ),
 					new THREE.MeshBasicMaterial()

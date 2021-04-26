@@ -28,9 +28,10 @@ app.get('/app', (req, res) => res.render('index.ejs', {
             name: "Thai Chicken Curry",
             priceString: "Rs. 290",
             price: 290,
+            id: "thaiCurry",
             object: {
-                url: "/obj/pots2.glb",
-                scale: [0.25, 0.25, 0.25]
+                url: "/obj/chutcake.glb",
+                scale: [1, 1, 1]
                 // scale: [1, 1, 1]
             }
         },
@@ -39,18 +40,20 @@ app.get('/app', (req, res) => res.render('index.ejs', {
             name: "American Hotdog",
             priceString: "Rs. 180",
             price: 180,
+            id: "hotdog",
             object: {
-                url: "/obj/hotdog.gltf",
-                scale: [1, 1, 1]
+                url: "/obj/chutfood.glb",
+                scale: [0.1, 0.1, 0.1]
             }
         },
         {
             imageUrl: "https://media.bizj.us/view/img/10100451/burger*1024xx2020-1142-0-256.jpg",
             name: "Mexican Cheeseburger",
             priceString: "Rs. 1080",
+            id: "burger",
             price: 180,
             object: {
-                url: "/obj/neoburger.gltf",
+                url: "/obj/loaf.glb",
                 scale: [0.5, 0.5, 0.5]
             }
         },

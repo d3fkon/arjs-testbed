@@ -14,6 +14,10 @@ window.onload = () => {
     flkty.on('settle', (currentIndex) => {
         AFRAME.scenes[0].emit('nextModel', { currentIndex })
     })
+    document.querySelector('#aEntity').addEventListener('model-loaded', () => {
+        console.log("MODEL LOADED? FUCK YEEE", Date.now())
+
+    })
 
 }
 
@@ -22,7 +26,7 @@ const sayHi = () => {
     // const thaiasset = document.queryselector('#thai');
     // thaiasset.setattribute('src','https://192.168.11.208:5678/obj/asset.gltf')
     AFRAME.scenes[0].emit('changeModel', {
-        modelId: "https://192.168.11.208:5678/obj/asset.gltf"
+        modelId: "/obj/asset.gltf"
     })
     console.log("Whats up bud")
 }

@@ -1,9 +1,10 @@
 // An object which takes A-Frame Asset Properties
 class Model {
-    constructor(name, url, scale) {
+    constructor(id, name, url, scale) {
         this.name = name;
         this.url = url;
         this.scale = [...scale].join(' ');
+        this.id = `#${id}`;
     }
 }
 
@@ -11,7 +12,7 @@ class Model {
 // TODO: Should created from an API
 const models = []
 for (const item of menuItems)
-    models.push(new Model(item.name, item.object.url, item.object.scale));
+    models.push(new Model(item.id, item.name, item.object.url, item.object.scale));
 
 /// Register AFRAME State Singleton
 AFRAME.registerState({
@@ -28,6 +29,7 @@ AFRAME.registerState({
         // Automatically switch to the next model based on the 'currentIndex' passed in the action
         nextModel: function (state, action) {
             const { currentIndex } = action;
+            console.log("Next model", Date.now())
             state.model = models[currentIndex % models.length]
         }
     },
